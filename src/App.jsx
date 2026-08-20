@@ -665,7 +665,7 @@ function Footer() {
         <div>
           <p className="font-display font-bold text-white text-lg">THE DATA BUILDER</p>
           <p className="font-body text-sm text-slate-400 mt-2">AWS Data Engineer Training</p>
-          <p className="font-body text-sm text-slate-400 mt-4 flex items-center gap-2"><Phone size={14} /> 9119442191 / 9158280087</p>
+          <p className="font-body text-sm text-slate-400 mt-4 flex items-center gap-2"><Phone size={14} /> +91 7709 348 242 / +91 9158 280 087</p>
         </div>
         {cols.map((col, i) => (
           <div key={i}>
