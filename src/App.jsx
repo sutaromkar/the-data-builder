@@ -170,9 +170,9 @@ const WHO_FOR = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Add Student Name", role: "Before: Support Analyst → After: Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 5 },
-  { name: "Add Student Name", role: "Before: Fresh Graduate → After: Junior Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 5 },
-  { name: "Add Student Name", role: "Before: Manual QA → After: Cloud Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 5 },
+  { name: "Sagar Ghadge", role: "Before: Support Analyst → After: Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 4 },
+  { name: "Omkar Sutar", role: "Before: Fresh Graduate → After: Junior Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 4 },
+  { name: "Sangram D.", role: "Before: Manual QA → After: Cloud Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 4.5 },
 ];
 
 const FAQS = [
