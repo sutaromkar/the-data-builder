@@ -91,7 +91,6 @@ const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Course", href: "#course" },
   { label: "Curriculum", href: "#curriculum" },
-  { label: "Projects", href: "#curriculum" },
   { label: "Career Support", href: "#career-support" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -266,43 +265,68 @@ function Hero() {
     <section id="home" className="relative overflow-hidden bg-zinc-950 pt-16 pb-24">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(245,158,11,0.16),_transparent_60%)]" />
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+
       <div className="relative max-w-7xl mx-auto px-6 pt-16">
+
         <Reveal>
-          <Eyebrow>Python · SQL · Spark / PySpark · AWS</Eyebrow>
+          <Eyebrow>
+            Python · SQL · Spark / PySpark · AWS
+          </Eyebrow>
         </Reveal>
+
         <Reveal delay={100}>
           <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white mt-6 max-w-3xl leading-tight">
-            Become a <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">Job-Ready</span> AWS Data Engineer
+            Become a{" "}
+            <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+              Job-Ready
+            </span>{" "}
+            AWS Data Engineer
           </h1>
         </Reveal>
+
         <Reveal delay={200}>
           <p className="font-body text-slate-300 text-lg mt-6 max-w-2xl">
-            A complete, job-focused program that takes you from programming fundamentals to building production-grade data pipelines on AWS.
+            A complete, job-focused program that takes you from programming
+            fundamentals to building production-grade data pipelines on AWS.
           </p>
         </Reveal>
+
         <Reveal delay={300}>
           <div className="flex flex-wrap gap-4 mt-8">
-            <a href="#enroll" className="font-body font-semibold px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 hover:brightness-110 transition flex items-center gap-2">
+            <a
+              href="#enroll"
+              className="font-body font-semibold px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 hover:brightness-110 transition flex items-center gap-2"
+            >
               Enroll Now <ArrowRight size={18} />
             </a>
-            <a href="#curriculum" className="font-body font-semibold px-7 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/5 transition flex items-center gap-2">
+
+            <a
+              href="#curriculum"
+              className="font-body font-semibold px-7 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/5 transition flex items-center gap-2"
+            >
               View Curriculum <ChevronDown size={18} />
             </a>
           </div>
         </Reveal>
+
         <Reveal delay={400}>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-14 max-w-2xl">
-            {["4 Months Duration", "6 Core Modules", "100% Hands-On", "1:1 Doubt Support"].map((s) => (
-              <div key={s} className="font-body text-sm text-slate-300 border-l-2 border-orange-400/50 pl-3">{s}</div>
+            {[
+              "4 Months Duration",
+              "6 Core Modules",
+              "100% Hands-On",
+              "1:1 Doubt Support",
+            ].map((s) => (
+              <div
+                key={s}
+                className="font-body text-sm text-slate-300 border-l-2 border-orange-400/50 pl-3"
+              >
+                {s}
+              </div>
             ))}
           </div>
         </Reveal>
-        <Reveal delay={500} className="mt-16">
-          <GlassCard className="p-8">
-            <p className="font-mono text-xs text-slate-500 mb-6 uppercase tracking-widest">The pipeline you'll be able to build</p>
-            <PipelineFlow />
-          </GlassCard>
-        </Reveal>
+
       </div>
     </section>
   );
