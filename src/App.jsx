@@ -4,7 +4,7 @@ import {
   Database, Cloud, GitBranch, Layers, Zap,
   Code2, Terminal, BarChart3, Workflow, Star, Phone, MessageCircle,
   MapPin, Mail, User, Briefcase, GraduationCap, TrendingUp, Target,
-  BookOpen, Award, Users, CheckCircle2, ExternalLink
+  BookOpen, Award, Users
 } from "lucide-react";
 
 /* ----------------------------- shared bits ----------------------------- */
@@ -80,14 +80,22 @@ function GlassCard({ children, className = "" }) {
 function GradientBorder({ children, className = "" }) {
   return (
     <div className={`relative rounded-2xl p-[1px] bg-gradient-to-br from-orange-400/60 via-white/10 to-indigo-500/60 ${className}`}>
-      <div className="rounded-2xl bg-slate-950 h-full w-full">{children}</div>
+      <div className="rounded-2xl bg-zinc-950 h-full w-full">{children}</div>
     </div>
   );
 }
 
 /* ------------------------------- data ------------------------------- */
 
-const NAV_LINKS = ["Home", "Course", "Curriculum", "Projects", "Career Support", "About", "Contact"];
+const NAV_LINKS = [
+  { label: "Home", href: "#home" },
+  { label: "Course", href: "#course" },
+  { label: "Curriculum", href: "#curriculum" },
+  { label: "Projects", href: "#curriculum" },
+  { label: "Career Support", href: "#career-support" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
 const WHY_CARDS = [
   { icon: Terminal, title: "100% Hands-On Learning", body: "Work on practical data engineering tasks and real-world pipeline development." },
@@ -136,13 +144,6 @@ const MODULES = [
   },
 ];
 
-const PROJECTS = [
-  { title: "Large-Scale Data Transformation Job", obj: "Process and transform large datasets efficiently at scale.", tech: ["PySpark", "S3"], skills: ["Partitioning", "Performance tuning"] },
-  { title: "Multi-Source Join Pipeline", obj: "Combine multiple data sources and perform complex transformations.", tech: ["PySpark", "SQL", "S3"], skills: ["Joins", "Schema handling"] },
-  { title: "Sales Ranking with Window Functions", obj: "Build analytical SQL transformations using ranking logic.", tech: ["SQL", "Redshift"], skills: ["Window functions", "Analytics SQL"] },
-  { title: "End-to-End AWS ETL Pipeline", obj: "Ship a full production-style pipeline from source to warehouse.", tech: ["Python", "SQL", "PySpark", "S3", "Glue", "Redshift", "Lambda"], skills: ["Orchestration", "System design"] },
-];
-
 const JOURNEY = ["Learn Python", "Master SQL", "Learn Big Data", "Master PySpark", "Learn AWS Data Services", "Build End-to-End ETL", "Prepare for Interviews", "Get Job Ready"];
 
 const CAREER = [
@@ -152,8 +153,6 @@ const CAREER = [
   { icon: Briefcase, title: "Placement Support", points: ["Job referrals", "Hiring drives", "Guidance until placement"] },
   { icon: TrendingUp, title: "Career Mentorship", points: ["Support beyond your first role", "Long-term growth guidance"] },
 ];
-
-const INTERVIEW_CATS = ["Python", "SQL", "PySpark", "AWS", "ETL", "Data Warehousing", "Big Data", "Scenario-Based"];
 
 const BENEFITS = [
   { big: "4 Months", small: "Course Duration" },
@@ -169,8 +168,6 @@ const WHO_FOR = [
   { icon: BarChart3, title: "Data Analysts", body: "Move from analytics toward Data Engineering and cloud technologies." },
   { icon: BookOpen, title: "Students", body: "Build practical projects and industry-relevant skills early." },
 ];
-
-const TECH_STACK = ["Python", "SQL", "Apache Spark", "PySpark", "Amazon S3", "AWS Glue", "AWS Lambda", "IAM", "Amazon Redshift", "Amazon EC2", "Athena", "Step Functions"];
 
 const TESTIMONIALS = [
   { name: "Add Student Name", role: "Before: Support Analyst → After: Data Engineer", quote: "Placeholder testimonial — swap in a real student quote and photo here.", rating: 5 },
@@ -234,7 +231,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-slate-950/90 backdrop-blur-xl border-b border-white/10" : "bg-transparent"}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-zinc-950/90 backdrop-blur-xl border-b border-white/10" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 font-display font-bold text-lg text-white">
           <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-slate-950 text-sm">TDB</span>
@@ -242,7 +239,7 @@ function Navbar() {
         </a>
         <nav className="hidden lg:flex items-center gap-7 font-body text-sm text-slate-300">
           {NAV_LINKS.map((l) => (
-            <a key={l} href={`#${l.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-orange-400 transition-colors">{l}</a>
+            <a key={l.label} href={l.href} className="hover:text-orange-400 transition-colors">{l.label}</a>
           ))}
         </nav>
         <div className="hidden lg:block">
@@ -253,9 +250,9 @@ function Navbar() {
         </button>
       </div>
       {open && (
-        <div className="lg:hidden bg-slate-950 border-t border-white/10 px-6 py-4 flex flex-col gap-4 font-body text-slate-300">
+        <div className="lg:hidden bg-zinc-950 border-t border-white/10 px-6 py-4 flex flex-col gap-4 font-body text-slate-300">
           {NAV_LINKS.map((l) => (
-            <a key={l} href={`#${l.toLowerCase().replace(/\s+/g, "-")}`} onClick={() => setOpen(false)} className="hover:text-orange-400">{l}</a>
+            <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="hover:text-orange-400">{l.label}</a>
           ))}
           <a href="#enroll" onClick={() => setOpen(false)} className="text-center font-semibold px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950">Enroll Now</a>
         </div>
@@ -266,8 +263,8 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-slate-950 pt-16 pb-24">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(99,102,241,0.18),_transparent_60%)]" />
+    <section id="home" className="relative overflow-hidden bg-zinc-950 pt-16 pb-24">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(245,158,11,0.16),_transparent_60%)]" />
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-6 pt-16">
         <Reveal>
@@ -311,6 +308,27 @@ function Hero() {
   );
 }
 
+function StatsBar() {
+  const stats = [
+    { value: "4", label: "Months, Cohort-Based" },
+    { value: "1:1", label: "Mentorship from Data Engineers" },
+    { value: "100%", label: "Hands-On, Project-Led" },
+    { value: "6", label: "Core Modules, Job-Focused" },
+  ];
+  return (
+    <section className="bg-zinc-900 border-y border-white/5 py-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 80} className="text-center sm:text-left">
+            <p className="font-display font-bold text-3xl sm:text-4xl bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">{s.value}</p>
+            <p className="font-body text-xs sm:text-sm text-slate-400 mt-1">{s.label}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function WhyChooseUs() {
   return (
     <section id="about" className="bg-white py-24">
@@ -343,7 +361,7 @@ function CourseOverview() {
     ["Support", "1:1 Doubt Support"], ["Projects", "End-to-End ETL Projects"],
   ];
   return (
-    <section id="course" className="bg-slate-950 py-24">
+    <section id="course" className="bg-zinc-950 py-24">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
         <Reveal>
           <Eyebrow>Course Overview</Eyebrow>
@@ -404,7 +422,7 @@ function ModuleCard({ m, open, onToggle }) {
 function Curriculum() {
   const [openKey, setOpenKey] = useState("python");
   return (
-    <section id="curriculum" className="bg-slate-950 py-24 border-t border-white/5">
+    <section id="curriculum" className="bg-zinc-950 py-24 border-t border-white/5">
       <div className="max-w-5xl mx-auto px-6">
         <Reveal>
           <Eyebrow>Curriculum</Eyebrow>
@@ -423,90 +441,9 @@ function Curriculum() {
   );
 }
 
-function Capstone() {
-  const stages = [
-    { k: "Extract", tools: "Python · APIs · S3 · JDBC" },
-    { k: "Transform", tools: "PySpark · Pandas · SQL" },
-    { k: "Load", tools: "Redshift · Glue · S3" },
-    { k: "Orchestrate", tools: "Lambda · Step Functions" },
-  ];
-  const flow = ["Source Data", "Python/API", "S3 Raw", "PySpark/Glue", "Validation", "S3 Curated", "Redshift", "Analytics"];
-  return (
-    <section id="projects" className="bg-slate-900 py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <Reveal>
-          <Eyebrow>Capstone Project</Eyebrow>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-4 max-w-2xl">Build a Production-Style End-to-End ETL Pipeline</h2>
-          <p className="font-body text-slate-400 mt-4 max-w-2xl">
-            Combine Python, SQL, PySpark, S3, AWS Glue, Redshift and Lambda into one pipeline that mirrors what real Data Engineering teams ship.
-          </p>
-        </Reveal>
-        <Reveal delay={150}>
-          <div className="mt-12 overflow-x-auto">
-            <div className="flex items-center gap-2 min-w-max py-2">
-              {flow.map((f, i) => (
-                <React.Fragment key={f}>
-                  <span className="font-mono text-xs sm:text-sm text-slate-200 border border-white/10 bg-white/[0.04] rounded-lg px-4 py-2.5 whitespace-nowrap">{f}</span>
-                  {i < flow.length - 1 && <ArrowRight size={16} className="text-orange-400/60 shrink-0" />}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-          {stages.map((s, i) => (
-            <Reveal key={s.k} delay={i * 80}>
-              <GradientBorder>
-                <div className="p-6 h-full">
-                  <span className="font-mono text-xs text-orange-400">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="font-display font-semibold text-white text-lg mt-2">{s.k.toUpperCase()}</h3>
-                  <p className="font-body text-sm text-slate-400 mt-2">{s.tools}</p>
-                </div>
-              </GradientBorder>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Projects() {
-  return (
-    <section className="bg-white py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <Reveal>
-          <Eyebrow tone="indigo">Hands-On Projects</Eyebrow>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4">Projects That Look Good on a Resume</h2>
-        </Reveal>
-        <div className="grid sm:grid-cols-2 gap-6 mt-12">
-          {PROJECTS.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
-              <div className="h-full rounded-2xl border border-slate-200 p-7 flex flex-col hover:shadow-xl hover:shadow-orange-100 hover:border-orange-300 transition-all">
-                <h3 className="font-display font-semibold text-slate-900 text-lg">{p.title}</h3>
-                <p className="font-body text-slate-500 text-sm mt-2">{p.obj}</p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {p.tech.map((t) => (
-                    <span key={t} className="font-mono text-xs px-2.5 py-1 rounded-md bg-orange-50 text-orange-600 border border-orange-200">{t}</span>
-                  ))}
-                </div>
-                <p className="font-body text-xs text-slate-400 mt-4 uppercase tracking-wide">Skills learned</p>
-                <p className="font-body text-sm text-slate-600 mt-1">{p.skills.join(" · ")}</p>
-                <button className="mt-auto pt-5 font-body text-sm font-semibold text-orange-600 flex items-center gap-1.5 hover:gap-2.5 transition-all">
-                  View Project <ExternalLink size={14} />
-                </button>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function LearningJourney() {
   return (
-    <section className="bg-slate-950 py-24 border-t border-white/5">
+    <section className="bg-zinc-950 py-24 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
           <Eyebrow>Learning Journey</Eyebrow>
@@ -566,34 +503,9 @@ function CareerSupport() {
   );
 }
 
-function InterviewPrep() {
-  return (
-    <section className="bg-slate-900 py-24">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <Reveal>
-          <Eyebrow>Interview Preparation</Eyebrow>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-4">Prepare for the Questions Companies Actually Ask</h2>
-        </Reveal>
-        <Reveal delay={120}>
-          <div className="flex flex-wrap justify-center gap-3 mt-10">
-            {INTERVIEW_CATS.map((c) => (
-              <span key={c} className="font-mono text-sm px-4 py-2 rounded-full border border-white/15 text-slate-200 hover:border-orange-400/50 hover:text-orange-300 transition">{c}</span>
-            ))}
-          </div>
-        </Reveal>
-        <Reveal delay={220}>
-          <div className="mt-10 inline-block rounded-full border border-orange-400/30 bg-orange-400/10 px-6 py-3 font-body text-orange-200 text-sm">
-            100+ SQL Join Practice Questions — joins and window functions are the most-asked topics.
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function Benefits() {
   return (
-    <section className="bg-slate-950 py-20 border-t border-white/5">
+    <section className="bg-zinc-950 py-20 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
         {BENEFITS.map((b, i) => (
           <Reveal key={b.small} delay={i * 80}>
@@ -636,53 +548,28 @@ function WhoIsThisFor() {
   );
 }
 
-function TechStackWall() {
-  return (
-    <section className="bg-slate-950 py-24 border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <Reveal>
-          <Eyebrow>Technology Stack</Eyebrow>
-          <h2 className="font-display font-bold text-3xl text-white mt-4">Everything You'll Actually Use on the Job</h2>
-        </Reveal>
-        <div className="flex flex-wrap justify-center gap-3 mt-10">
-          {TECH_STACK.map((t, i) => (
-            <Reveal key={t} delay={i * 40}>
-              <span className="font-mono text-sm px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-slate-200 hover:border-orange-400/40 hover:text-orange-300 hover:-translate-y-0.5 transition-all inline-block">
-                {t}
-              </span>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Testimonials() {
-  const [idx, setIdx] = useState(0);
   return (
     <section className="bg-white py-24">
-      <div className="max-w-3xl mx-auto px-6 text-center">
-        <Reveal>
+      <div className="max-w-7xl mx-auto px-6">
+        <Reveal className="text-center max-w-2xl mx-auto">
           <Eyebrow tone="indigo">Testimonials</Eyebrow>
-          <h2 className="font-display font-bold text-3xl text-slate-900 mt-4">What Students Say</h2>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4">What Students Say</h2>
         </Reveal>
-        <Reveal delay={120}>
-          <div className="mt-10 rounded-2xl border border-slate-200 p-10">
-            <div className="flex justify-center gap-1 mb-5">
-              {Array.from({ length: TESTIMONIALS[idx].rating }).map((_, i) => (
-                <Star key={i} size={16} className="fill-orange-400 text-orange-400" />
-              ))}
-            </div>
-            <p className="font-body text-slate-600 text-lg italic">"{TESTIMONIALS[idx].quote}"</p>
-            <p className="font-display font-semibold text-slate-900 mt-6">{TESTIMONIALS[idx].name}</p>
-            <p className="font-body text-sm text-slate-500">{TESTIMONIALS[idx].role}</p>
-          </div>
-        </Reveal>
-        <div className="flex justify-center gap-2 mt-6">
-          {TESTIMONIALS.map((_, i) => (
-            <button key={i} onClick={() => setIdx(i)} aria-label={`Testimonial ${i + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${i === idx ? "bg-orange-500 w-6" : "bg-slate-300"}`} />
+        <div className="grid sm:grid-cols-3 gap-6 mt-12">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 100}>
+              <div className="h-full rounded-2xl border border-slate-200 p-7 flex flex-col hover:border-orange-300 hover:shadow-xl hover:shadow-orange-100 transition-all">
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-orange-400 text-orange-400" />
+                  ))}
+                </div>
+                <p className="font-body text-slate-600 text-sm italic leading-relaxed flex-1">"{t.quote}"</p>
+                <p className="font-display font-semibold text-slate-900 mt-6">{t.name}</p>
+                <p className="font-body text-xs text-slate-500">{t.role}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -693,7 +580,7 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section className="bg-slate-950 py-24 border-t border-white/5">
+    <section className="bg-zinc-950 py-24 border-t border-white/5">
       <div className="max-w-3xl mx-auto px-6">
         <Reveal>
           <Eyebrow>FAQ</Eyebrow>
@@ -717,57 +604,30 @@ function FAQ() {
   );
 }
 
+const GOOGLE_FORM_VIEW_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdhr9EkDM1-JId3FZrowpGss7rHGdmAhYAQLGehCgtBsTL6dA/viewform?usp=header";
+
 function EnrollmentForm() {
-  const [submitted, setSubmitted] = useState(false);
   return (
     <section id="enroll" className="bg-white py-24">
       <div className="max-w-4xl mx-auto px-6">
         <Reveal className="text-center">
           <Eyebrow tone="indigo">Admissions</Eyebrow>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4">Start Your Data Engineering Journey</h2>
+          <p className="font-body text-slate-500 mt-3">Fill out the enrollment form and a counsellor will reach out to confirm your free session.</p>
         </Reveal>
         <Reveal delay={120}>
-          <div className="mt-10 rounded-2xl border border-slate-200 p-8">
-            {submitted ? (
-              <div className="text-center py-10">
-                <CheckCircle2 className="mx-auto text-orange-500" size={40} />
-                <p className="font-display font-semibold text-slate-900 text-xl mt-4">Request received</p>
-                <p className="font-body text-slate-500 mt-2">A counsellor will call you shortly to confirm your free session.</p>
-              </div>
-            ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="grid sm:grid-cols-2 gap-5">
-                {[
-                  ["Full Name", "text"], ["Mobile Number", "tel"], ["Email", "email"], ["Current Role", "text"],
-                  ["Experience", "text"], ["City", "text"],
-                ].map(([label, type]) => (
-                  <label key={label} className="font-body text-sm text-slate-600 flex flex-col gap-1.5">
-                    {label}
-                    <input required type={type} className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
-                  </label>
-                ))}
-                <label className="font-body text-sm text-slate-600 flex flex-col gap-1.5">
-                  Preferred Learning Mode
-                  <select required className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100">
-                    <option value="">Select an option</option>
-                    <option>Online — Live</option>
-                    <option>Offline — Classroom</option>
-                    <option>Hybrid</option>
-                  </select>
-                </label>
-                <label className="font-body text-sm text-slate-600 flex flex-col gap-1.5 sm:col-span-2">
-                  Message
-                  <textarea rows={3} className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
-                </label>
-                <div className="sm:col-span-2 flex flex-wrap gap-4 mt-2">
-                  <button type="submit" className="font-body font-semibold px-7 py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 hover:brightness-110 transition">
-                    Book a Free Counselling Session
-                  </button>
-                  <a href="tel:9119442191" className="font-body font-semibold px-7 py-3 rounded-full border border-slate-300 text-slate-700 hover:border-orange-400 transition flex items-center gap-2">
-                    <MessageCircle size={16} /> WhatsApp / Call Us
-                  </a>
-                </div>
-              </form>
-            )}
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <a
+              href={GOOGLE_FORM_VIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body font-semibold px-7 py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 hover:brightness-110 transition"
+            >
+              Book a Free Counselling Session
+            </a>
+            <a href="tel:9119442191" className="font-body font-semibold px-7 py-3 rounded-full border border-slate-300 text-slate-700 hover:border-orange-400 transition flex items-center gap-2">
+              <MessageCircle size={16} /> WhatsApp / Call Us
+            </a>
           </div>
         </Reveal>
       </div>
@@ -777,7 +637,7 @@ function EnrollmentForm() {
 
 function FinalCTA() {
   return (
-    <section className="relative bg-slate-950 py-24 overflow-hidden">
+    <section className="relative bg-zinc-950 py-24 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(251,146,60,0.15),_transparent_60%)]" />
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <Reveal>
@@ -795,12 +655,12 @@ function FinalCTA() {
 
 function Footer() {
   const cols = [
-    ["Home", "Course", "Curriculum", "Projects"],
+    ["Home", "Course", "Curriculum"],
     ["Career Support", "About", "Contact"],
     ["Privacy Policy", "Terms & Conditions"],
   ];
   return (
-    <footer id="contact" className="bg-slate-950 border-t border-white/10 pt-16 pb-8">
+    <footer id="contact" className="bg-zinc-950 border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <p className="font-display font-bold text-white text-lg">THE DATA BUILDER</p>
@@ -824,21 +684,18 @@ function Footer() {
 
 export default function DataBuilderSite() {
   return (
-    <div className="font-body bg-slate-950 min-h-screen">
+    <div className="font-body bg-zinc-950 min-h-screen">
       <style>{FONT_STYLE}</style>
       <Navbar />
       <Hero />
+      <StatsBar />
       <WhyChooseUs />
       <CourseOverview />
       <Curriculum />
-      <Capstone />
-      <Projects />
       <LearningJourney />
       <CareerSupport />
-      <InterviewPrep />
       <Benefits />
       <WhoIsThisFor />
-      <TechStackWall />
       <Testimonials />
       <FAQ />
       <EnrollmentForm />
