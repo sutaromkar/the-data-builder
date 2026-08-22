@@ -113,11 +113,10 @@ const MODULES = [
       "OOP", "Generators, decorators, iterators", "List comprehensions", "Performance optimization"],
   },
   {
-    n: "02", key: "sql", title: "SQL for Data Engineers", sub: "Basic → Advanced", icon: Database,
+    n: "02", key: "sql", title: "SQL", sub: "Basic → Advanced", icon: Database,
     topics: ["DBMS/RDBMS, keys & constraints", "DDL · DML · DQL · TCL · DCL", "Joins & subqueries", "CTEs & recursive CTEs",
       "Window functions", "GROUP BY / HAVING, set ops", "Views & materialized views", "Indexes & query optimization",
       "CASE WHEN, pivot/unpivot", "MERGE / UPSERT", "Stored procedures & triggers", "Cursors & error handling"],
-    highlight: "Window Functions & Joins — the most important SQL topics for Data Engineer interviews.",
   },
   {
     n: "03", key: "spark", title: "Spark & PySpark", sub: "Big Data Processing", icon: Zap,
